@@ -1,20 +1,10 @@
 # Contributing
 
-This project is currently maintained as an actively developed portfolio/reference implementation.
+1. Create a focused feature branch.
+2. Make the smallest maintainable change.
+3. Add or update tests for backend behavior.
+4. Run backend tests and the frontend production build.
+5. Update documentation when architecture or behavior changes.
+6. Open a pull request with validation notes.
 
-## Development workflow
-
-1. Create a focused branch from `main`.
-2. Keep changes scoped to one feature or fix.
-3. Do not commit credentials, private keys, real certificates, `.env` files or local databases.
-4. Run backend checks and the frontend build before submitting changes.
-5. Describe security or data-model implications in the pull request.
-
-## Commit style
-
-Prefer concise conventional-style messages:
-
-- `feat: add certificate approval history`
-- `fix: align dashboard counts with shared store`
-- `docs: document HSM trust boundary`
-- `test: cover certificate revocation workflow`
+Quality gates: Python compilation, backend tests, frontend build and Docker image build must pass. Never commit secrets, local databases, caches or dependency directories.
