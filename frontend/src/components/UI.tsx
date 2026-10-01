@@ -1,5 +1,5 @@
 import {ReactNode} from 'react';import {LoaderCircle,AlertTriangle} from 'lucide-react';
-export const Card=({children,className=''})=><div className={`card ${className}`}>{children}</div>;
+export const Card=({children,className='' }:{children:ReactNode;className?:string})=><div className={`card ${className}`}>{children}</div>;
 export const Status=({value}:{value:string})=>{const s=value.toUpperCase();const c=s.includes('SIGNED')||s==='ACTIVE'||s==='HEALTHY'||s==='SUCCESS'||s==='APPROVED'?'green':s.includes('PENDING')||s==='ROTATING'?'amber':s.includes('FAIL')||s.includes('REJECT')||s==='RETIRED'?'red':s==='SUSPENDED'?'purple':'blue';return <span className={`badge ${c}`}>{value.replaceAll('_',' ')}</span>};
 export const PageHead=({title,sub,action}:{title:string;sub:string;action?:ReactNode})=><div className="flex items-start justify-between gap-4 mb-5"><div><div className="title">{title}</div><div className="sub">{sub}</div></div>{action}</div>;
 export const Loading=()=> <div className="card p-10 flex items-center justify-center gap-2 muted"><LoaderCircle className="animate-spin" size={18}/>Loading secure control-plane data…</div>;
