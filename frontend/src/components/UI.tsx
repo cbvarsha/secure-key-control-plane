@@ -1,0 +1,8 @@
+import {ReactNode} from 'react';import {LoaderCircle,AlertTriangle} from 'lucide-react';
+export const Card=({children,className=''})=><div className={`card ${className}`}>{children}</div>;
+export const Status=({value}:{value:string})=>{const s=value.toUpperCase();const c=s.includes('SIGNED')||s==='ACTIVE'||s==='HEALTHY'||s==='SUCCESS'||s==='APPROVED'?'green':s.includes('PENDING')||s==='ROTATING'?'amber':s.includes('FAIL')||s.includes('REJECT')||s==='RETIRED'?'red':s==='SUSPENDED'?'purple':'blue';return <span className={`badge ${c}`}>{value.replaceAll('_',' ')}</span>};
+export const PageHead=({title,sub,action}:{title:string;sub:string;action?:ReactNode})=><div className="flex items-start justify-between gap-4 mb-5"><div><div className="title">{title}</div><div className="sub">{sub}</div></div>{action}</div>;
+export const Loading=()=> <div className="card p-10 flex items-center justify-center gap-2 muted"><LoaderCircle className="animate-spin" size={18}/>Loading secure control-plane data…</div>;
+export const ErrorBox=({message}:{message:string})=><div className="card p-5 text-rose-300 flex gap-2"><AlertTriangle size={18}/>{message}</div>;
+export const Empty=({text='No records found.'}:{text?:string})=><div className="p-8 text-center muted">{text}</div>;
+export const Modal=({title,children,onClose}:{title:string;children:ReactNode;onClose:()=>void})=><div className="fixed inset-0 bg-black/70 z-50 flex items-center justify-center p-4" onMouseDown={onClose}><div className="card w-full max-w-xl p-5" onMouseDown={e=>e.stopPropagation()}><div className="flex justify-between items-center mb-4"><h2 className="text-lg font-bold">{title}</h2><button className="btn btn-ghost" onClick={onClose}>×</button></div>{children}</div></div>;
