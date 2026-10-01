@@ -1,0 +1,2 @@
+import {useEffect,useState} from "react";import {api} from "../api/client";import {PageHead,Card,Loading,ErrorBox} from "../components/UI";
+export default function UsersRoles(){const[d,setD]=useState<any>();const[e,setE]=useState("");useEffect(()=>{api<any>("/users").then(setD).catch((x:any)=>setE(x.message))},[]);if(!d&&!e)return <Loading/>;return <><PageHead title="Users & Roles" sub="Administrative RBAC visibility."/>{e&&<ErrorBox message={e}/>}<Card className="p-5"><pre className="text-xs whitespace-pre-wrap overflow-auto">{JSON.stringify(d,null,2)}</pre></Card></>}
