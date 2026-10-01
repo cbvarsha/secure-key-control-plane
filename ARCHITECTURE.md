@@ -1,34 +1,43 @@
 # Architecture
 
-## System flow
+## Design goals
 
-`User → React UI → FastAPI REST API → Domain Services → SQLAlchemy/SQLite`
+The PKI Control Plane is structured around four concerns: **lifecycle orchestration, policy governance, operational visibility and auditable access control**.
 
-Main workflow:
+## Logical components
 
-`Developer → Signing Request → Policy Validation → Security Approval → Release Approval (Production) → Simulated HSM → Evidence + Audit`
+### Control-plane UI
+Provides routed operational modules for certificates, signing, policy, trust, monitoring and access administration. Shared application state keeps mutations synchronized across related views.
 
-## Backend boundaries
+### Python service layer
+Provides the API boundary and SQL persistence foundation. PKI integrations can evolve behind stable service contracts.
 
-- `app/api`: HTTP routes and endpoint orchestration.
-- `app/models`: persistence entities.
-- `app/schemas`: API contracts.
-- `app/security`: JWT and password verification.
-- `app/services/policy_engine.py`: environment-aware policy evaluation.
-- `app/services/workflow_service.py`: request and approval state transitions.
-- `app/services/audit_service.py`: SHA-256 chained audit entries.
-- `app/services/simulated_hsm.py`: explicit non-production HSM simulation.
-- `app/services/evidence_service.py`: evidence creation and exports.
+### Security boundary
+The UI is not a security boundary. Production authorization, policy enforcement and separation of duties must be enforced server-side. Private keys must never be exposed to the browser or ordinary application storage.
 
-## Security principles
+## Target production evolution
 
-1. Authorization is server-side.
-2. Requesters cannot approve their own requests.
-3. Production requires distinct Security and Release approval stages.
-4. Private-key material is never stored or exposed.
-5. Secrets are environment-only.
-6. Audit records are chained to provide tamper evidence.
+```text
+Users / Operators
+      |
+Identity Provider + MFA
+      |
+React Control Plane
+      |
+API Gateway / AuthZ
+      |
+PKI Orchestration Services
+  |       |        |
+ CA     HSM/KMS   Audit Store
+  |       |        |
+Certificates   Signing Evidence
+```
 
-## Deployment
+## Reliability principles
 
-Docker Compose runs FastAPI on port 8000 and the React/Nginx frontend on port 3000. SQLite is persisted in a named Docker volume for local demonstration.
+- Idempotent lifecycle operations
+- Explicit approval states
+- Tamper-resistant audit evidence
+- No private-key export from the HSM/KMS boundary
+- Observable service health and latency
+- Separation between requester and approver roles
