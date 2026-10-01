@@ -81,7 +81,7 @@ flowchart TB
     MON --> DB
 ```
 
-See the detailed [Architecture Guide](ARCHITECTURE.md).
+See the detailed [Architecture Guide](docs/ARCHITECTURE.md).
 
 ---
 
@@ -252,7 +252,12 @@ secure-key-control-plane/
 │   └── package.json
 ├── docs/
 │   ├── screenshots/
-│   └── secure-key-control-plane-project-guide.pdf
+│   ├── ARCHITECTURE.md
+│   ├── API.md
+│   ├── DEMO-WALKTHROUGH.md
+│   ├── PROJECT_GUIDE.md
+│   ├── RUNBOOK.md
+│   └── GITHUB-PROFILE-README-TEMPLATE.md
 ├── ARCHITECTURE.md
 ├── RUNBOOK.md
 ├── SECURITY.md
@@ -344,13 +349,15 @@ npm run build
 
 ## Documentation
 
-- [Project Architecture](ARCHITECTURE.md)
-- [Engineering Runbook](RUNBOOK.md)
+- [Project Architecture](docs/ARCHITECTURE.md)
+- [API Overview](docs/API.md)
+- [Demo Walkthrough](docs/DEMO-WALKTHROUGH.md)
+- [Engineering Runbook](docs/RUNBOOK.md)
 - [Security Policy](SECURITY.md)
 - [Contributing Guide](CONTRIBUTING.md)
 - [Code of Conduct](CODE_OF_CONDUCT.md)
-- [Corporate Project Guide PDF](docs/secure-key-control-plane-project-guide.pdf)
-- [Source archive](docs/source-archive.zip)
+- [Project Guide](docs/PROJECT_GUIDE.md)
+- [GitHub Profile README Template](docs/GITHUB-PROFILE-README-TEMPLATE.md)
 
 ---
 
