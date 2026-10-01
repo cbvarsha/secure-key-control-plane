@@ -1,17 +1,17 @@
 # Security Policy
 
-## Scope
+This repository is a portfolio demonstration of a secure signing control plane. It is not a production cryptographic signing service.
 
-This repository is a portfolio demonstration and is not a production signing platform. The HSM layer is simulated and no private-key material is stored.
+## Security boundary
 
-## Reporting
+- The HSM integration is explicitly simulated.
+- No private-key material is stored or exposed.
+- Authentication uses JWT access tokens.
+- Authorization is enforced server-side through role checks.
+- Production approvals use separation of duties.
+- Audit records use a chained SHA-256 integrity mechanism.
+- Secrets must be supplied through environment variables and never committed.
 
-Please open a private security report through the repository owner rather than publishing sensitive details in an issue. For non-sensitive defects, use GitHub Issues.
+## Production hardening still required
 
-## Secret handling
-
-Never commit `.env`, JWT secrets, database credentials, API tokens, private keys or certificates containing secret material. Use `.env.example` as the configuration template.
-
-## Production warning
-
-The demo accounts, SQLite database, simulated signatures and local configuration are for development/portfolio use only.
+A production deployment would require managed database infrastructure, real HSM/KMS integration, secret management, TLS, immutable audit storage, centralized logging, monitoring, rate limiting, SSO/MFA and formal threat modelling.
